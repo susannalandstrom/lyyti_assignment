@@ -2,8 +2,8 @@ import CryptoJS from 'crypto-js'
 import { Base64 } from 'js-base64';
 
 const baseUrl = 'https://api.lyyti.com/v2/'
-const public_key = ''
-const private_key = ''
+const public_key = process.env.REACT_APP_PUBLIC_KEY
+const private_key = process.env.REACT_APP_PRIVATE_KEY
 
 const createSignature = (timestamp, callString) => CryptoJS.HmacSHA256(
     Base64.encode(public_key+','+timestamp+','+callString),
