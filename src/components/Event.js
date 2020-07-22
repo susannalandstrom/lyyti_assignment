@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import { FavoriteBorder } from '@material-ui/icons';
 
 function Event(props) {
-  const date = new Date(props.event.start_time)
+  const startTime = new Date(props.event.start_time * 1000)
 
   const getName = () => {
     const keys = Object.keys(props.event.name)
@@ -23,7 +23,7 @@ function Event(props) {
       
       <div className="oneLine">
         <Typography className="category">{props.event.category[1].title}</Typography>
-        <Typography>{date.toString()}</Typography>
+        <Typography>{startTime.toString()}</Typography>
       </div>
     </div>
   );
