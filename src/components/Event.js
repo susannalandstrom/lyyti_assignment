@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { Typography } from '@material-ui/core';
-import { FavoriteBorder } from '@material-ui/icons';
+import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
 function Event(props) {
   const startTime = new Date(props.event.start_time * 1000)
@@ -18,7 +18,7 @@ function Event(props) {
     <div className="eventContainer">
       <div className="oneLine">
         <Typography style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>{getName()}</Typography>
-        <FavoriteBorder />
+        {props.isFavorite ? <Favorite /> : <FavoriteBorder onClick={() => props.setAsFavorite(props.event)}/>}
       </div>
       
       <div className="oneLine">

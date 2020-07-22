@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Sort } from '@material-ui/icons';
 import '../App.css';
 import Event from './Event'
 import lyytiApi from '../service.js'
+import { Typography } from '@material-ui/core';
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -16,6 +17,7 @@ function EventsContainer() {
     const [selectedTime, setSelectedTime] = useState();
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([])
+    const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         const currentTime = new Date()
@@ -44,19 +46,29 @@ function EventsContainer() {
         }
     }
 
+    const setAsFavorite = (event) =>
+        setFavorites(oldFavorites => [...oldFavorites, event])
+
+    const checkIfFavorite = (event) => {
+        if (favorites.includes(event)) return true
+        else return false
+    }
+
+
+
   return (
     <div className="eventListContainer">
-        <div className="oneLine">
+        <div className="oneLine" style={{ padding: '10px 0' }}>
             <div className="monthSelector">
-                <ChevronLeft onClick={() => changeSelectedTime(-1)}/>
-                {selectedTime && <h2>{monthNames[selectedTime.month] + ' ' + selectedTime.year}</h2>}
-                <ChevronRight onClick={() => changeSelectedTime(1)}/>
+                <ChevronLeft onClick={() => changeSelectedTime(-1)} fontSize="large"/>
+                {selectedTime && <Typography variant="h2">{monthNames[selectedTime.month] + ' ' + selectedTime.year}</Typography>}
+                <ChevronRight onClick={() => changeSelectedTime(1)} fontSize="large"/>
             </div>
-            <Sort />
+            <Sort fontSize="large"/>
         </div>
         
         {filteredEvents.map(event => {
-            return <Event key={event.id} event={event}/>
+            return <Event key={event.id} event={event} setAsFavorite={setAsFavorite} isFavorite={checkIfFavorite(event)}/>
         })}
     </div>
   );
