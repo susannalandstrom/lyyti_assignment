@@ -12,12 +12,12 @@ const filterEvents = (events, selectedTime) =>
         new Date(event.start_time * 1000).getMonth() === selectedTime.month 
         && new Date(event.start_time * 1000).getFullYear() === selectedTime.year)
 
-function EventsContainer() {
+function EventsContainer(props) {
     const [currentTime, setCurrentTime] = useState();
     const [selectedTime, setSelectedTime] = useState();
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([])
-    const [favorites, setFavorites] = useState([]);
+    // const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         const currentTime = new Date()
@@ -46,15 +46,13 @@ function EventsContainer() {
         }
     }
 
-    const setAsFavorite = (event) =>
-        setFavorites(oldFavorites => [...oldFavorites, event])
+    // const setAsFavorite = (event) =>
+    //     setFavorites(oldFavorites => [...oldFavorites, event])
 
     const checkIfFavorite = (event) => {
-        if (favorites.includes(event)) return true
+        if (props.favorites.includes(event)) return true
         else return false
     }
-
-
 
   return (
     <div className="eventListContainer">
@@ -68,7 +66,7 @@ function EventsContainer() {
         </div>
         
         {filteredEvents.map(event => {
-            return <Event key={event.id} event={event} setAsFavorite={setAsFavorite} isFavorite={checkIfFavorite(event)}/>
+            return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
         })}
     </div>
   );
