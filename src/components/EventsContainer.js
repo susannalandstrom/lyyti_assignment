@@ -30,13 +30,27 @@ function EventsContainer() {
         setFilteredEvents(filterEvents(events, selectedTime))
     }, [selectedTime, events])
 
+    const changeSelectedTime = (direction) => {
+        const newSelectedMonth = selectedTime.month + direction
+        if ( newSelectedMonth <= 11 && newSelectedMonth >= 0) {
+            const newSelectedTime = { month: newSelectedMonth, year: selectedTime.year }
+            setSelectedTime(newSelectedTime)
+        }
+        else if (newSelectedMonth > 11) {
+            setSelectedTime({ month: 0, year: selectedTime.year + 1 })
+        }
+        else if (newSelectedMonth < 0) {
+            setSelectedTime({ month: 11, year: selectedTime.year - 1 })
+        }
+    }
+
   return (
     <div className="eventListContainer">
         <div className="oneLine">
             <div className="monthSelector">
-                <ChevronLeft/>
+                <ChevronLeft onClick={() => changeSelectedTime(-1)}/>
                 {selectedTime && <h2>{monthNames[selectedTime.month] + ' ' + selectedTime.year}</h2>}
-                <ChevronRight />
+                <ChevronRight onClick={() => changeSelectedTime(1)}/>
             </div>
             <Sort />
         </div>
