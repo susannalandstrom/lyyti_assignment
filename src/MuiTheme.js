@@ -26,7 +26,17 @@ const theme = createMuiTheme({
     overrides: {
         MuiIconButton: {
             root: {
-                color: 'white'
+                color: 'white',
+                '&:hover': {
+                    backgroundColor: '#9191914d'
+                }
+            },
+        },
+        MuiTooltip: {
+            tooltip: {
+                color: 'white',
+                backgroundColor: '#9191914d',
+                fontSize: '12px'
             }
         }
     }
