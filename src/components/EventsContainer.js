@@ -13,13 +13,16 @@ const filterEventsByMonth = (events, selectedTime) =>
         new Date(event.start_time * 1000).getMonth() === selectedTime.month 
         && new Date(event.start_time * 1000).getFullYear() === selectedTime.year)
 
-const getCategories = (events) => {
-    const categories = events.map(event => event.category["1"])
-    const uniqueCategories = categories.reduce((acc, category) => {
-        if (acc.map(category => category.id).includes(category.id)) return acc;
-        return [...acc, category]
-    }, [])
-    return uniqueCategories
+const filterEventsByCategory = (events, categories) => {
+    const categoryIds = categories.filter(category => category.isSelectedAsFilter === true).map(category => category.id)
+    return events.filter(event => {
+        let idFound = false;
+        const categoryKeys = Object.keys(event.category)
+        categoryKeys.forEach(key => {
+            if (categoryIds.includes(event.category[key].id)) idFound = true;
+        })
+        return idFound;
+    })
 }
 
 function EventsContainer(props) {
@@ -39,12 +42,18 @@ function EventsContainer(props) {
     }, [])
 
     useEffect(() => {
-        setFilteredEvents(filterEventsByMonth(events, selectedTime))
-    }, [selectedTime, events])
+        lyytiApi("categories?as_array=1")
+        .then(res => {
+            const categories = res.results.map(obj => ({ ...obj, isSelectedAsFilter: true }))
+            setCategories(categories)
+        })
+    }, [events])
 
     useEffect(() => {
-        setCategories(getCategories(events))
-    }, [events])
+        const timeFiltered = filterEventsByMonth(events, selectedTime)
+        const categoryFiltered = filterEventsByCategory(timeFiltered, categories)
+        setFilteredEvents(categoryFiltered)
+    }, [selectedTime, events, categories])
 
     const changeSelectedTime = (direction) => {
         const newSelectedMonth = selectedTime.month + direction
@@ -65,6 +74,14 @@ function EventsContainer(props) {
         else return false
     }
 
+    const handleFilterChange = (id) => {
+        setCategories(oldCategories => 
+            oldCategories.map(
+                category => category.id === id
+                ? {...category, isSelectedAsFilter: !category.isSelectedAsFilter}
+                : category))
+    }
+
   return (
     <div className="eventGrid">
         <div className="oneLine" style={{ marginBottom: '20px' }}>
@@ -81,7 +98,7 @@ function EventsContainer(props) {
                     </IconButton>
                 </Tooltip>
             </div>
-            <FilterPopover categories={categories}/>
+            <FilterPopover categories={categories} handleFilterChange={handleFilterChange}/>
         </div>
         {filteredEvents.map(event => {
             return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
