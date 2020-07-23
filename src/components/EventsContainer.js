@@ -100,9 +100,17 @@ function EventsContainer(props) {
             </div>
             <FilterPopover categories={categories} handleFilterChange={handleFilterChange}/>
         </div>
-        {filteredEvents.map(event => {
-            return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
-        })}    
+        { filteredEvents.length > 0 
+        ? 
+        <div style={{ overflow: 'scroll', height: 'inherit' }}>
+            {filteredEvents.map(event => {
+                return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
+            })}
+        </div> 
+        : 
+        <Typography style={{ textAlign: 'center' }}>No events yet</Typography>
+        }
+  
     </div>
   );
 }
