@@ -4,6 +4,8 @@ import EventsContainer from './components/EventsContainer'
 import img_mobile from './bg_mobile.jpg'
 import img_desktop from './bg_desktop.jpg'
 import Header from './components/Header'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import theme from './MuiTheme'
 
 function App() {
   const [favorites, setFavorites] = useState([]);
@@ -14,6 +16,7 @@ function App() {
         setFavorites(oldFavorites => [...oldFavorites, event])
 
   return (
+    <MuiThemeProvider theme={theme}>
     <div className="gridContainer" style={{ backgroundImage:`url("${image}")`, backgroundRepeat: 'no-repeat', color: 'white', backgroundSize: 'cover' }}>
       <div style={{ backgroundColor: 'rgba(100, 52, 128, 0.49)', height: '100vh' }}>
         <Header favorites={favorites}/>
@@ -21,6 +24,7 @@ function App() {
       </div>
       <div className="footer"><p>© 2020 Paperstr, Inc.</p></div>
     </div>
+    </MuiThemeProvider>
   );
 }
 
