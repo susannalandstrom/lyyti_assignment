@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Sort } from '@material-ui/icons';
+import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 import '../App.css';
 import Event from './Event'
+import FilterPopover from './FilterPopover'
 import lyytiApi from '../service.js'
 import { Typography, IconButton, Tooltip } from '@material-ui/core';
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-const filterEvents = (events, selectedTime) => 
+const filterEventsByMonth = (events, selectedTime) => 
     events.filter(event => 
         new Date(event.start_time * 1000).getMonth() === selectedTime.month 
         && new Date(event.start_time * 1000).getFullYear() === selectedTime.year)
+
+const getCategories = (events) => {
+    const categories = events.map(event => event.category["1"])
+    const uniqueCategories = categories.reduce((acc, category) => {
+        if (acc.map(category => category.id).includes(category.id)) return acc;
+        return [...acc, category]
+    }, [])
+    return uniqueCategories
+}
 
 function EventsContainer(props) {
     const [currentTime, setCurrentTime] = useState();
     const [selectedTime, setSelectedTime] = useState();
     const [events, setEvents] = useState([]);
-    const [filteredEvents, setFilteredEvents] = useState([])
+    const [filteredEvents, setFilteredEvents] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         const currentTime = new Date()
@@ -28,8 +39,12 @@ function EventsContainer(props) {
     }, [])
 
     useEffect(() => {
-        setFilteredEvents(filterEvents(events, selectedTime))
+        setFilteredEvents(filterEventsByMonth(events, selectedTime))
     }, [selectedTime, events])
+
+    useEffect(() => {
+        setCategories(getCategories(events))
+    }, [events])
 
     const changeSelectedTime = (direction) => {
         const newSelectedMonth = selectedTime.month + direction
@@ -66,11 +81,7 @@ function EventsContainer(props) {
                     </IconButton>
                 </Tooltip>
             </div>
-            <Tooltip title="Filter" placement="left">
-                <IconButton>
-                    <Sort fontSize="large"/>
-                </IconButton>
-            </Tooltip>
+            <FilterPopover categories={categories}/>
         </div>
         {filteredEvents.map(event => {
             return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
