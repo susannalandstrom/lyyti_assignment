@@ -38,6 +38,22 @@ const theme = createMuiTheme({
                 backgroundColor: '#9191914d',
                 fontSize: '12px'
             }
+        },
+        MuiFormControl: {
+            root: {
+                margin: '10px'
+            }
+        },
+        MuiFormLabel: {
+            root: {
+                margin: '10px'
+            }
+        },
+        MuiFormControlLabel: {
+            root: {
+                margin: '10px',
+                marginLeft: '10px',
+            }
         }
     }
 })
