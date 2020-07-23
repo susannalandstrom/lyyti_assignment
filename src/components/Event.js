@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import { Typography } from '@material-ui/core';
+import { Typography, Tooltip, IconButton } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
 function Event(props) {
@@ -18,7 +18,15 @@ function Event(props) {
     <div className="eventContainer">
       <div className="oneLine">
         <Typography style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '10px' }}>{getName()}</Typography>
-        {props.isFavorite ? <Favorite /> : <FavoriteBorder onClick={() => props.setAsFavorite(props.event)}/>}
+        {props.isFavorite 
+        ? <IconButton>
+              <Favorite /> 
+          </IconButton>
+        : <Tooltip title="Add to favorites" placement="left">
+              <IconButton onClick={() => props.setAsFavorite(props.event)}>
+                  <FavoriteBorder/>
+              </IconButton>
+          </Tooltip>}
       </div>
       
       <div className="oneLine">

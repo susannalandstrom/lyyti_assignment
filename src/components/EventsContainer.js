@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Sort } from '@material-ui/icons';
 import '../App.css';
 import Event from './Event'
 import lyytiApi from '../service.js'
-import { Typography } from '@material-ui/core';
+import { Typography, IconButton, Tooltip } from '@material-ui/core';
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -54,15 +54,27 @@ function EventsContainer(props) {
     <div className="eventGrid">
         <div className="oneLine" style={{ marginBottom: '20px' }}>
             <div className="monthSelector">
-                <ChevronLeft onClick={() => changeSelectedTime(-1)} fontSize="large"/>
+                <Tooltip title="Previous" placement="left">
+                    <IconButton onClick={() => changeSelectedTime(-1)}>
+                        <ChevronLeft fontSize="large"/>
+                    </IconButton>
+                </Tooltip>
                 {selectedTime && <Typography variant="h2">{monthNames[selectedTime.month] + ' ' + selectedTime.year}</Typography>}
-                <ChevronRight onClick={() => changeSelectedTime(1)} fontSize="large"/>
+                <Tooltip title="Next" placement="right">
+                    <IconButton onClick={() => changeSelectedTime(1)}>
+                        <ChevronRight fontSize="large"/>
+                    </IconButton>
+                </Tooltip>
             </div>
-            <Sort fontSize="large"/>
+            <Tooltip title="Filter" placement="left">
+                <IconButton>
+                    <Sort fontSize="large"/>
+                </IconButton>
+            </Tooltip>
         </div>
         {filteredEvents.map(event => {
             return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
-        })}
+        })}    
     </div>
   );
 }
