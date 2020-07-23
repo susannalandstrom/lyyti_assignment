@@ -17,7 +17,6 @@ function EventsContainer(props) {
     const [selectedTime, setSelectedTime] = useState();
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([])
-    // const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         const currentTime = new Date()
@@ -46,17 +45,14 @@ function EventsContainer(props) {
         }
     }
 
-    // const setAsFavorite = (event) =>
-    //     setFavorites(oldFavorites => [...oldFavorites, event])
-
     const checkIfFavorite = (event) => {
         if (props.favorites.includes(event)) return true
         else return false
     }
 
   return (
-    <div className="eventListContainer">
-        <div className="oneLine" style={{ padding: '10px 0' }}>
+    <div className="eventGrid">
+        <div className="oneLine" style={{ marginBottom: '20px' }}>
             <div className="monthSelector">
                 <ChevronLeft onClick={() => changeSelectedTime(-1)} fontSize="large"/>
                 {selectedTime && <Typography variant="h2">{monthNames[selectedTime.month] + ' ' + selectedTime.year}</Typography>}
@@ -64,7 +60,6 @@ function EventsContainer(props) {
             </div>
             <Sort fontSize="large"/>
         </div>
-        
         {filteredEvents.map(event => {
             return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
         })}

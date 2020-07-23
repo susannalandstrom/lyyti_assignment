@@ -1,38 +1,76 @@
-.App {
+.gridContainer {
+  display: grid;
+  grid-template-areas: 
+    "header"
+    "eventGrid"
+    "footer";
+  grid-template-rows: 120px 1fr 50px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  grid-area: header;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  height: 120px;
+  padding: 0 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eventGrid {
+  grid-area: eventGrid;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin: 50px 100px;
+  height: calc(100vh - 270px);
+  overflow: hidden;
+}
+
+.footer {
+  grid-area: footer;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: inline-grid;
+  background-color: #222222;
+  opacity: 0.7;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.category {
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 5px 8px;
+  color: #2a431c;
+  background-color: #93c377;
+  opacity: 0.7;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.oneLine {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.eventContainer {
+  color: #222222;
+  background-color: #ffffff91;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.monthSelector {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  justify-content: space-between;
 }
