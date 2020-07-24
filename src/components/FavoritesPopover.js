@@ -55,7 +55,7 @@ function FavoritesPopover(props) {
                                 }
                             />
                             <CardContent>
-                                {getCategories(favorite).map(category => <Typography key={category.id} color="secondary">{category}</Typography>)}
+                                {getCategories(favorite).map(category => <Typography key={category} color="secondary">{category}</Typography>)}
                                 <Typography>{formatTime(favorite.start_time)}</Typography>
                             </CardContent>
                         </Card>

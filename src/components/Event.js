@@ -23,7 +23,7 @@ function Event(props) {
           </Tooltip>}
       </div>
       <div className="oneLine">
-        {getCategories(props.event).map(category => <Typography className="category">{category}</Typography>)}
+        {getCategories(props.event).map(category => <Typography key={category} className="category">{category}</Typography>)}
         <Typography>{formatTime(props.event.start_time)}</Typography>
       </div>
     </div>
