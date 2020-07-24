@@ -86,13 +86,13 @@ function EventsContainer(props) {
     <div className="eventGrid">
         <div className="oneLine" style={{ marginBottom: '20px' }}>
             <div className="monthSelector">
-                <Tooltip title="Previous" placement="left">
+                <Tooltip title="Previous" placement="top">
                     <IconButton onClick={() => changeSelectedTime(-1)}>
                         <ChevronLeft fontSize="large"/>
                     </IconButton>
                 </Tooltip>
                 {selectedTime && <Typography variant="h2">{monthNames[selectedTime.month] + ' ' + selectedTime.year}</Typography>}
-                <Tooltip title="Next" placement="right">
+                <Tooltip title="Next" placement="top">
                     <IconButton onClick={() => changeSelectedTime(1)}>
                         <ChevronRight fontSize="large"/>
                     </IconButton>
