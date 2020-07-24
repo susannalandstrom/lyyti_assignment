@@ -12,8 +12,10 @@ function App() {
 
   const image = window.innerWidth >= 650 ? img_desktop : img_mobile;
 
-  const setAsFavorite = (event) =>
-        setFavorites(oldFavorites => [...oldFavorites, event])
+  const setAsFavorite = (e, event) => {
+    e.stopPropagation()
+    setFavorites(oldFavorites => [...oldFavorites, event])
+  }
 
   return (
     <MuiThemeProvider theme={theme}>

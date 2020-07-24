@@ -23,7 +23,7 @@ function Event(props) {
               <Favorite /> 
           </IconButton>
         : <Tooltip title="Add to favorites" placement="left">
-              <IconButton onClick={() => props.setAsFavorite(props.event)}>
+              <IconButton onClick={(e) => props.setAsFavorite(e, props.event)}>
                   <FavoriteBorder/>
               </IconButton>
           </Tooltip>}
