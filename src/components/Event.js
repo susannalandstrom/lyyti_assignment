@@ -3,8 +3,9 @@ import '../App.css';
 import { Typography, Tooltip, IconButton } from '@material-ui/core';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
 function Event(props) {
-  const startTime = new Date(props.event.start_time * 1000)
 
   const getName = () => {
     const keys = Object.keys(props.event.name)
@@ -12,6 +13,21 @@ function Event(props) {
       return props.event.name.en
     }
     else return props.event.name[keys[0]]
+  }
+
+  const formatTime = (startTime) => {
+    const minute = startTime.getMinutes()
+    const second = startTime.getSeconds()
+    const minuteFormatted = minute < 10 ? "0" + minute : minute
+    const secondFormatted = second < 10 ? "0" + second : second
+    
+    return weekdays[startTime.getDay()] + ' ' 
+            + startTime.getDate() + '.' 
+            + startTime.getMonth() + 1 + '.' 
+            + startTime.getFullYear() + ' ' 
+            + startTime.getHours() + ':' 
+            + minuteFormatted + ':' 
+            + secondFormatted
   }
 
   return (
@@ -31,7 +47,7 @@ function Event(props) {
       
       <div className="oneLine">
         <Typography className="category">{props.event.category[1].title}</Typography>
-        <Typography>{startTime.toString()}</Typography>
+        <Typography>{formatTime(new Date(props.event.start_time * 1000))}</Typography>
       </div>
     </div>
   );
