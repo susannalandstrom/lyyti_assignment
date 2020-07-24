@@ -16,7 +16,7 @@
   grid-column-start: 1;
   grid-column-end: 2;
   height: 120px;
-  padding: 0 200px;
+  padding: 0 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +28,7 @@
   grid-row-end: 3;
   grid-column-start: 1;
   grid-column-end: 2;
-  margin: 50px 100px;
+  margin: 50px 5%;
   height: calc(100vh - 300px);
 }
 
@@ -70,6 +70,5 @@
 .monthSelector {
   display: flex;
   align-items: center;
-  width: 340px;
   justify-content: space-between;
 }
