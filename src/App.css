@@ -29,8 +29,7 @@
   grid-column-start: 1;
   grid-column-end: 2;
   margin: 50px 100px;
-  height: calc(100vh - 270px);
-  overflow: hidden;
+  height: calc(100vh - 300px);
 }
 
 .footer {
