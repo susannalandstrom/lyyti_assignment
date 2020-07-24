@@ -17,11 +17,16 @@ function App() {
     setFavorites(oldFavorites => [...oldFavorites, event])
   }
 
+  const removeFavorite = (id) => {
+    const newFavorites = favorites.filter(favorite => favorite.id !== id)
+    setFavorites(newFavorites)
+  }
+
   return (
     <MuiThemeProvider theme={theme}>
     <div className="gridContainer" style={{ backgroundImage:`url("${image}")`, backgroundRepeat: 'no-repeat', color: 'white', backgroundSize: 'cover' }}>
       <div style={{ backgroundColor: 'rgba(100, 52, 128, 0.49)', height: '100vh' }}>
-        <Header favorites={favorites}/>
+        <Header favorites={favorites} removeFavorite={removeFavorite}/>
         <EventsContainer favorites={favorites} setAsFavorite={setAsFavorite}/>
       </div>
       <div className="footer"><p>© 2020 Paperstr, Inc.</p></div>

@@ -8,7 +8,7 @@ function Header(props) {
   return (
     <div className="header">
         <Typography variant="h1">Paperstr Events</Typography>
-        <FavoritesPopover favorites={props.favorites}/>
+        <FavoritesPopover favorites={props.favorites} removeFavorite={props.removeFavorite}/>
     </div>
   );
 }
