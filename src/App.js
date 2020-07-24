@@ -29,7 +29,7 @@ function App() {
         <Header favorites={favorites} removeFavorite={removeFavorite}/>
         <EventsContainer favorites={favorites} setAsFavorite={setAsFavorite}/>
       </div>
-      <div className="footer"><p>© 2020 Paperstr, Inc.</p></div>
+      <div className="footer"><p>© {new Date().getFullYear()} Paperstr, Inc.</p></div>
     </div>
     </MuiThemeProvider>
   );
