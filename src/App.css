@@ -72,3 +72,15 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.detailedView {
+  margin: 10%;
+  padding: 10px;
+  background-color: #ffffff91;
+  border-radius: 5px;
+}
+
+.detailedViewHeader {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
