@@ -8,6 +8,9 @@ const theme = createMuiTheme({
         },
         secondary: {
             main: '#93c377'
+        },
+        error: {
+            main: '#a91107'
         }
     },
     typography: {
@@ -79,6 +82,24 @@ const theme = createMuiTheme({
         MuiCardContent: {
             root: {
                 padding: '0 16px 16px 16px'
+            }
+        },
+        MuiButton: {
+            root: {
+                color: 'white',
+                backgroundColor: 'rgb(60, 12, 88)',
+                '&:hover': {
+                    backgroundColor: '#93c377'
+                },
+                '&:disabled': {
+                    color: '#d4d4d4',
+                    backgroundColor: '#848484'
+                }
+            },
+            text: {
+                padding: '15px 20px',
+                fontWeight: 'bold',
+                fontSize: '1.1em'
             }
         }
     }
