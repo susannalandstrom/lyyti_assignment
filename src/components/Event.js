@@ -9,7 +9,7 @@ import { formatTime } from '../functions/formatTime'
 function Event(props) {
 
   return (
-    <div className="eventContainer">
+    <div className="eventContainer" onClick={() => props.onClick(props.event.event_id)}>
       <div className="oneLine">
         <Typography variant="h3">{getName(props.event)}</Typography>
         {props.isFavorite 
