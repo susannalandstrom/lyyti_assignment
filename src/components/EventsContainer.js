@@ -26,7 +26,6 @@ const filterEventsByCategory = (events, categories) => {
 }
 
 function EventsContainer(props) {
-    const [currentTime, setCurrentTime] = useState();
     const [selectedTime, setSelectedTime] = useState();
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
@@ -34,7 +33,6 @@ function EventsContainer(props) {
 
     useEffect(() => {
         const currentTime = new Date()
-        setCurrentTime(currentTime)
         setSelectedTime({ month: currentTime.getMonth(), year: currentTime.getFullYear() })
 
         lyytiApi("events?as_array=1")
