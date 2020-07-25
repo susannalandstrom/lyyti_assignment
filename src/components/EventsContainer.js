@@ -5,12 +5,6 @@ import Event from './Event'
 import FilterPopover from './FilterPopover'
 import lyytiApi from '../service.js'
 import { Typography, IconButton, Tooltip } from '@material-ui/core';
-import { useLocation } from "react-router-dom";
-import history from 'history/browser';
-
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -38,8 +32,6 @@ function EventsContainer(props) {
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [categories, setCategories] = useState([]);
 
-    const categoryFilters = useQuery().get("categories");
-
     useEffect(() => {
         const currentTime = new Date()
         setCurrentTime(currentTime)
@@ -50,14 +42,14 @@ function EventsContainer(props) {
     }, [])
 
     useEffect(() => {
-        const urlParameters = categoryFilters && categoryFilters.split(',')
+        const urlParameters = props.categoryFilters && props.categoryFilters.split(',')
 
         lyytiApi("categories?as_array=1")
         .then(res => {
             const categories = res.results.map(obj => ({ ...obj, isSelectedAsFilter: urlParameters ? urlParameters.includes(obj.title.toLowerCase()) : true}))
             setCategories(categories)
         })
-    }, [events, categoryFilters])
+    }, [events, props.categoryFilters])
 
     useEffect(() => {
         const timeFiltered = filterEventsByMonth(events, selectedTime)
@@ -98,7 +90,7 @@ function EventsContainer(props) {
             (category.id !== id && category.isSelectedAsFilter === true)
             || (category.id === id && category.isSelectedAsFilter === false))
         const newParameters = selectedFilters.map(filter => filter.title.toLowerCase())
-        history.push('/?categories=' + newParameters.join())
+        props.history.push('/?categories=' + newParameters.join())
     }
 
   return (
@@ -123,7 +115,12 @@ function EventsContainer(props) {
         ? 
         <div style={{ overflow: 'scroll', height: 'inherit' }}>
             {filteredEvents.map(event => {
-                return <Event key={event.id} event={event} setAsFavorite={props.setAsFavorite} isFavorite={checkIfFavorite(event)}/>
+                return <Event 
+                            key={event.id} 
+                            event={event} 
+                            setAsFavorite={props.setAsFavorite} 
+                            isFavorite={checkIfFavorite(event)}
+                            onClick={props.onEventClick}/>
             })}
         </div> 
         : 
