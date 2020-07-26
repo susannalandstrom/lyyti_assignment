@@ -48,10 +48,7 @@ function EventDetailedView() {
         <div className="detailedView">
             {event ? 
             <div>
-                <Typography className="detailedViewHeader">
-                    event name
-                </Typography>
-                <Typography color="primary" style={{ paddingLeft: '30px' }}>
+                <Typography color="primary" variant="h2" style={{ padding: '10px 0'}}>
                     {getName(event)}
                 </Typography>
                 <Typography className="detailedViewHeader">
