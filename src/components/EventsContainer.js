@@ -114,10 +114,11 @@ function EventsContainer(props) {
         ? 
         <div style={{ overflow: 'scroll', height: 'inherit' }}>
             {filteredEvents.map(event => {
-                return <Event 
-                            key={event.id} 
-                            event={event} 
-                            setAsFavorite={props.setAsFavorite} 
+                return <Event
+                            key={event.id}
+                            event={event}
+                            setAsFavorite={props.setAsFavorite}
+                            removeFavorite={props.removeFavorite}
                             isFavorite={checkIfFavorite(event)}
                             onClick={props.onEventClick}/>
             })}

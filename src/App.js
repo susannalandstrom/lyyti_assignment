@@ -26,7 +26,6 @@ function App() {
   }
 
   const setAsFavorite = (e, event) => {
-    e.stopPropagation()
     setFavorites(oldFavorites => [...oldFavorites, event])
   }
 
@@ -47,10 +46,11 @@ function App() {
           <Switch>
             <Route exact path={["/", "/?categories:"]}>
               <EventsContainer 
-                categoryFilters={useQuery().get("categories")} 
-                history={history} 
-                favorites={favorites} 
-                setAsFavorite={setAsFavorite} 
+                categoryFilters={useQuery().get("categories")}
+                history={history}
+                favorites={favorites}
+                setAsFavorite={setAsFavorite}
+                removeFavorite={removeFavorite}
                 onEventClick={navigateToEvent}/>
             </Route>
             <Route path="/events/:id">

@@ -13,11 +13,19 @@ function Event(props) {
       <div className="oneLine">
         <Typography variant="h3">{getName(props.event)}</Typography>
         {props.isFavorite 
-        ? <IconButton>
-              <Favorite color="primary"/> 
-          </IconButton>
+        ? <Tooltip title="Remove from favorites" placement="left">
+            <IconButton onClick={(e) => {
+              e.stopPropagation()
+              props.removeFavorite(props.event.id)}
+            }>
+                <Favorite color="primary"/> 
+            </IconButton>
+          </Tooltip>
         : <Tooltip title="Add to favorites" placement="left">
-              <IconButton onClick={(e) => props.setAsFavorite(e, props.event)}>
+              <IconButton onClick={(e) => {
+                e.stopPropagation()
+                props.setAsFavorite(e, props.event)
+                }}>
                   <FavoriteBorder color="primary"/>
               </IconButton>
           </Tooltip>}
