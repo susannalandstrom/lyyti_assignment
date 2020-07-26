@@ -77,7 +77,13 @@ function EventDetailedView() {
                     {formatTime(event.end_time)}
                 </Typography>
                 <div style={{ textAlign: 'center', paddingTop: '20px' }}>
-                    <Button disabled={!enableEnrollment}>Enroll</Button>
+                    <Button 
+                        disabled={!enableEnrollment} 
+                        href={event.enrollment_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer">
+                        Enroll
+                    </Button>
 
                     {enrollmentHasNotStarted && 
                     <Typography color="error">
