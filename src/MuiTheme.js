@@ -16,25 +16,29 @@ const theme = createMuiTheme({
     typography: {
         fontFamily: "Tahoma, Geneva, Cardo, Impact, Nobile",
         h1: {
-            fontSize: '1.8em',
+            fontSize: '28px',
             fontWeight: 'bold',
             letterSpacing: '1.3px'
         },
         h2: {
-            fontSize: '1.5em',
+            fontSize: '18px',
             fontWeight: 'bold',
             letterSpacing: '1.1px'
         },
         h3: {
-            fontSize: '1.1em',
+            fontSize: '14px',
             fontWeight: 'bold',
             marginBottom: '5px'
+        },
+        body1: {
+            fontSize: '12px'
         }
     },
     overrides: {
         MuiIconButton: {
             root: {
                 color: 'white',
+                padding: '8px',
                 '&:hover': {
                     backgroundColor: '#9191914d'
                 }
@@ -44,7 +48,7 @@ const theme = createMuiTheme({
             tooltip: {
                 color: 'white',
                 backgroundColor: '#9191914d',
-                fontSize: '12px'
+                fontSize: '10px'
             }
         },
         MuiFormControl: {
@@ -59,29 +63,32 @@ const theme = createMuiTheme({
         },
         MuiFormControlLabel: {
             root: {
-                margin: '10px',
-                marginLeft: '10px',
+                marginLeft: '10px'
             }
         },
         MuiCard: {
             root: {
                 margin: '10px',
                 borderRadius: '5px',
-                boxShadow: '0px 0px 10px 0px #9191914d'
+                boxShadow: '0px 0px 10px 0px #9191914d',
+                cursor: 'pointer',
+                '&:hover': {
+                    backgroundColor: '#eee'
+                }
             }
         },
         MuiCardHeader: {
             root: {
-                padding: '16px 16px 5px 16px'
+                padding: '10px 10px 5px 10px'
             },
             title: {
-                fontSize: '1.1em', 
+                fontSize: '14px', 
                 fontWeight: 'bold',
             }
         },
         MuiCardContent: {
             root: {
-                padding: '0 16px 16px 16px'
+                padding: '0 10px 10px 10px'
             }
         },
         MuiButton: {
@@ -97,9 +104,8 @@ const theme = createMuiTheme({
                 }
             },
             text: {
-                padding: '15px 20px',
-                fontWeight: 'bold',
-                fontSize: '1.1em'
+                padding: '10px',
+                fontWeight: 'bold'
             }
         }
     }

@@ -98,13 +98,13 @@ function EventsContainer(props) {
             <div className="monthSelector">
                 <Tooltip title="Previous" placement="top">
                     <IconButton onClick={() => changeSelectedTime(-1)}>
-                        <ChevronLeft fontSize="large"/>
+                        <ChevronLeft/>
                     </IconButton>
                 </Tooltip>
                 {selectedTime && <Typography variant="h2">{monthNames[selectedTime.month] + ' ' + selectedTime.year}</Typography>}
                 <Tooltip title="Next" placement="top">
                     <IconButton onClick={() => changeSelectedTime(1)}>
-                        <ChevronRight fontSize="large"/>
+                        <ChevronRight/>
                     </IconButton>
                 </Tooltip>
             </div>

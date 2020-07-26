@@ -49,7 +49,7 @@ function EventDetailedView(props) {
         <div style={{ margin: '10%' }}>
             <Tooltip title="Back" placement="right">
                 <IconButton onClick={() => props.history.go(-1)}>
-                    <ChevronLeft fontSize="large"/>
+                    <ChevronLeft/>
                 </IconButton>
             </Tooltip>
             <div className="detailedView">

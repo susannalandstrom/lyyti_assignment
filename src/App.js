@@ -13,6 +13,7 @@ import {
   useLocation
 } from "react-router-dom";
 import EventDetailedView from './components/EventDetailedView';
+import { Typography } from '@material-ui/core';
 
 function App() {
   const [favorites, setFavorites] = useState([]);
@@ -57,7 +58,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-        <div className="footer"><p>© {new Date().getFullYear()} Paperstr, Inc.</p></div>
+        <div className="footer"><Typography>© {new Date().getFullYear()} Paperstr, Inc.</Typography></div>
       </div>
       </MuiThemeProvider>
   );

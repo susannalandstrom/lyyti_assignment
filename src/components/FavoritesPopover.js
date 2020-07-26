@@ -25,7 +25,7 @@ function FavoritesPopover(props) {
             <Tooltip title="Favorites" placement="left">
                 <IconButton aria-describedby={id} onClick={handleClick}>
                     <Badge badgeContent={props.favorites.length} color="secondary">
-                        <Favorite fontSize="large"/>
+                        <Favorite/>
                     </Badge>
                 </IconButton>
             </Tooltip>

@@ -22,7 +22,7 @@ function FilterPopover(props) {
         <div>
             <Tooltip title="Filter" placement="left">
                 <IconButton aria-describedby={id} onClick={handleClick}>
-                    <Sort fontSize="large"/>
+                    <Sort/>
                 </IconButton>
             </Tooltip>
             <Popover
