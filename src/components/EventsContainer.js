@@ -70,7 +70,8 @@ function EventsContainer(props) {
     }
 
     const checkIfFavorite = (event) => {
-        if (props.favorites.includes(event)) return true
+        const favoriteIds = props.favorites.map(favorite => favorite.id)
+        if (favoriteIds.includes(event.id)) return true
         else return false
     }
 

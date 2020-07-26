@@ -42,7 +42,7 @@ function App() {
       <MuiThemeProvider theme={theme}>
       <div className="gridContainer" style={{ backgroundImage:`url("${image}")`, backgroundRepeat: 'no-repeat', color: 'white', backgroundSize: 'cover' }}>
         <div style={{ backgroundColor: 'rgba(100, 52, 128, 0.49)', height: '100vh' }}>
-          <Header favorites={favorites} removeFavorite={removeFavorite}/>
+          <Header favorites={favorites} removeFavorite={removeFavorite} onEventClick={navigateToEvent}/>
           <Switch>
             <Route exact path={["/", "/?categories:"]}>
               <EventsContainer 

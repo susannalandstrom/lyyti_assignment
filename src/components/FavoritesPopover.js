@@ -44,12 +44,15 @@ function FavoritesPopover(props) {
                 }}>
                 {props.favorites.map(favorite => {
                     return (
-                        <Card key={favorite.id}>
+                        <Card key={favorite.id} onClick={() => props.onEventClick(favorite.event_id)}>
                             <CardHeader 
                                 variant="h3" 
                                 title={getName(favorite)} 
                                 action={
-                                    <IconButton onClick={() => props.removeFavorite(favorite.id)}>
+                                    <IconButton onClick={(e) => {
+                                        e.stopPropagation()
+                                        props.removeFavorite(favorite.id)}
+                                    }>
                                         <Clear fontSize="small" color="primary"/>
                                     </IconButton>
                                 }
