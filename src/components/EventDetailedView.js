@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import lyytiApi from '../service.js';
-import { Typography, Button } from '@material-ui/core';
+import { Typography, Button, IconButton, Tooltip } from '@material-ui/core';
+import { ChevronLeft } from '@material-ui/icons';
 import { useParams } from 'react-router-dom';
 import { getName } from '../functions/getName';
 import { getCategories } from '../functions/getCategories';
 import { formatTime } from '../functions/formatTime'
 
-function EventDetailedView() {
+function EventDetailedView(props) {
     const [event, setEvent] = useState();
     const [currentTime, setCurrentTime] = useState();
 
@@ -45,59 +46,65 @@ function EventDetailedView() {
     const enrollmentHasNotStarted = event && currentTime < (event.enrollment_open * 1000)
 
     return(
-        <div className="detailedView">
-            {event ? 
-            <div>
-                <Typography color="primary" variant="h2" style={{ padding: '10px 0'}}>
-                    {getName(event)}
-                </Typography>
-                <Typography className="detailedViewHeader">
-                    Category
-                </Typography>
-                {getCategories(event).map(category => 
-                    <Typography key={category} color="primary" style={{ paddingLeft: '30px' }}>
-                        {category}
-                    </Typography>)}
-                <Typography className="detailedViewHeader">
-                    location
-                </Typography>
-                <Typography color="primary" style={{ paddingLeft: '30px' }}>
-                    {getLocation(event)}
-                </Typography>
-                <Typography className="detailedViewHeader">
-                    start time
-                </Typography>
-                <Typography color="primary" style={{ paddingLeft: '30px' }}>
-                    {formatTime(event.start_time)}
-                </Typography>
-                <Typography className="detailedViewHeader">
-                    end time
-                </Typography>
-                <Typography color="primary" style={{ paddingLeft: '30px' }}>
-                    {formatTime(event.end_time)}
-                </Typography>
-                <div style={{ textAlign: 'center', paddingTop: '20px' }}>
-                    <Button 
-                        disabled={!enableEnrollment} 
-                        href={event.enrollment_url} 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        Enroll
-                    </Button>
+        <div style={{ margin: '10%' }}>
+            <Tooltip title="Back" placement="right">
+                <IconButton onClick={() => props.history.go(-1)}>
+                    <ChevronLeft fontSize="large"/>
+                </IconButton>
+            </Tooltip>
+            <div className="detailedView">
+                {event ? 
+                <div>
+                    <Typography color="primary" variant="h2" style={{ padding: '10px 0'}}>
+                        {getName(event)}
+                    </Typography>
+                    <Typography className="detailedViewHeader">
+                        Category
+                    </Typography>
+                    {getCategories(event).map(category => 
+                        <Typography key={category} color="primary" style={{ paddingLeft: '30px' }}>
+                            {category}
+                        </Typography>)}
+                    <Typography className="detailedViewHeader">
+                        location
+                    </Typography>
+                    <Typography color="primary" style={{ paddingLeft: '30px' }}>
+                        {getLocation(event)}
+                    </Typography>
+                    <Typography className="detailedViewHeader">
+                        start time
+                    </Typography>
+                    <Typography color="primary" style={{ paddingLeft: '30px' }}>
+                        {formatTime(event.start_time)}
+                    </Typography>
+                    <Typography className="detailedViewHeader">
+                        end time
+                    </Typography>
+                    <Typography color="primary" style={{ paddingLeft: '30px' }}>
+                        {formatTime(event.end_time)}
+                    </Typography>
+                    <div style={{ textAlign: 'center', paddingTop: '20px' }}>
+                        <Button 
+                            disabled={!enableEnrollment} 
+                            href={event.enrollment_url} 
+                            target="_blank" 
+                            rel="noopener noreferrer">
+                            Enroll
+                        </Button>
 
-                    {enrollmentHasNotStarted && 
-                    <Typography color="error">
-                        Enrollment to this event starts {formatTime(event.enrollment_open)}
-                    </Typography>}
+                        {enrollmentHasNotStarted && 
+                        <Typography color="error">
+                            Enrollment to this event starts {formatTime(event.enrollment_open)}
+                        </Typography>}
 
-                    {enrollmentHasEnded && 
-                    <Typography color="error">
-                        Enrollment to this event has ended.
-                    </Typography>}
+                        {enrollmentHasEnded && 
+                        <Typography color="error">
+                            Enrollment to this event has ended.
+                        </Typography>}
+                    </div>
                 </div>
+                : <p>Fetching information</p>} 
             </div>
-            : <p>Fetching information</p>}
-            
         </div>
     );
 }

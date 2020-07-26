@@ -53,7 +53,7 @@ function App() {
                 onEventClick={navigateToEvent}/>
             </Route>
             <Route path="/events/:id">
-              <EventDetailedView/>
+              <EventDetailedView history={history} />
             </Route>
           </Switch>
         </div>
