@@ -91,7 +91,7 @@ const theme = createMuiTheme({
                 '&:hover': {
                     backgroundColor: '#93c377'
                 },
-                '&:disabled': {
+                '&$disabled': {
                     color: '#d4d4d4',
                     backgroundColor: '#848484'
                 }
